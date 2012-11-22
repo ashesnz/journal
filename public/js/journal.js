@@ -81,6 +81,7 @@ function JournalViewModel() {
         
         return id;
     }
+    
 }
 
 function processEntrys( data ) {

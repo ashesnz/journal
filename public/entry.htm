@@ -30,7 +30,7 @@
                             <a data-bind="attr: { href: id }">Edit this entry</a>
                         </nav>
                     </section>
-                    
+
                 </div>
             </div>
             
@@ -116,6 +116,20 @@
         }
     }
     
+    function bindEditToNewEntry() {
+        $($( ".journal-entry-nav a" )[0]).bind( "click", function(event) {
+                                         href = this.href.slice( this.href.lastIndexOf( "/" ) + 1);
+                                         
+                                         $(".journal-entry").addClass( "hide" );
+                                         
+                                         e = vm.entrys[href];
+                                         setEntry( e.id(), e.title(), e.tags(), e.body() );
+                                         $(".journal-entry-new").removeClass( "hide" );
+                                         
+                                         return false;
+                                         });
+    }
+    
     $( ".journal-entry-search" ).bind( "input", function(event) {
                                       search( $(this).val() );
                                       });
@@ -123,6 +137,7 @@
                                      href = this.href.slice( this.href.lastIndexOf( "/" ) + 1);
                                      if ( href == "save" ) {
                                      saveEntry();
+                                     bindEditToNewEntry();
                                      }
                                      $( ".rpg-submenu a" )[0].click();
                                      
@@ -131,9 +146,9 @@
 
     $( ".journal-entry-nav a" ).bind( "click", function(event) {
                                      href = this.href.slice( this.href.lastIndexOf( "/" ) + 1);
-                                     
+
                                      $(".journal-entry").addClass( "hide" );
-                                     
+
                                      e = vm.entrys[href];
                                      setEntry( e.id(), e.title(), e.tags(), e.body() );
                                      $(".journal-entry-new").removeClass( "hide" );
