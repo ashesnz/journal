@@ -1,0 +1,41 @@
+<html>
+    <head>
+        <script src="component/rpg-bootstrap/js/jquery-1.7.2.min.js"></script>
+        <script src="component/rpg-bootstrap/js/rpg-util.js"></script>
+        <script src="component/rpg-bootstrap/js/mfs.js"></script>
+        <script type="text/javascript" src="component/wmd/js/showdown.js"></script>
+        <script src="js/knockout-2.1.0.js"></script>
+
+        <link rel="stylesheet" type="text/css" href="component/rpg-bootstrap/css/rpg.css" />
+        <link rel="stylesheet" type="text/css" href="component/wmd/css/wmd.css" />
+
+        <link rel="stylesheet" type="text/css" href="css/main.css" />
+        <script src="js/journal.js"></script>
+    </head>
+    <body>
+        <header class='rpg-menu'>
+            <nav>
+                <a href='entry.htm'>Journal</a>
+            </nav>
+        </header>
+
+        <div class="rpg-page"></div>
+        <script>
+            $( ".rpg-menu a" ).bind( "click", function(event) {
+                                 page = this.href.slice( this.href.lastIndexOf( "/" ) + 1);
+                                 $.get(page, function(content) {
+                                       $( ".rpg-page" ).html( content );
+                                       $( ".rpg-body-title" ).html( $( this ).html() );
+                                       $( ".rpg-submenu a" )[0].click();
+                                       })
+                                 $(".rpg-menu a").removeClass( "selected" );
+                                 $(this).addClass( "selected" );
+
+                                 return false;
+                                 });
+
+            $( ".rpg-menu a" )[0].click();
+            </script>
+
+    </body>
+</html>

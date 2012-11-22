@@ -1,0 +1,67 @@
+.rpg-section h3 {
+background-color: transparent;
+font-weight: normal;
+color: rgba( 10,148,214, 0.8 );
+border-top: 1px solid rgba( 10,148,214, 0.8 );
+border-top-left-radius: 0px;
+border-top-right-radius: 0px;
+font-size: 1.4em;
+}
+.rpg-section div.rpg-section-content {
+border: none;
+}
+
+#wmd-input {
+height: 300px;
+width: 100%;
+background-color: transparent;
+border: 1px solid darkGray;
+}
+.wmd-panel {
+margin-left: 0;
+margin-right: 0;
+width: 100%;
+min-width: 300px;
+}
+
+#wmd-preview {
+    margin-top: 1.2em;
+    background-color: transparent;
+    border-top: 1px solid rgba( 10,148,214, 0.8 );
+}
+
+.hide {
+    display: none;
+}
+
+.journal-entry-new-title {
+width: 100%;
+font-size: 1.4em;
+color: rgba( 10,148,214, 0.8 );
+}
+.journal-entry-new-tags {
+width: 100%;
+}
+
+.journal-entry-nav {
+    padding: 5px 15px;
+}
+.journal-entry-nav a {
+    font-size: 0.8em;
+}
+
+.button {
+    padding: 5px 15px;
+    background-color: rgba( 10,148,214, 0.8 );
+    color: white;
+    text-decoration: none;
+}
+
+.journal-body {
+    margin-top: 15px;
+}
+
+.journal-tags {
+    border-top: 1px solid black;
+    border-bottom: 1px solid black;
+}

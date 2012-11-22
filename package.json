@@ -1,0 +1,29 @@
+{
+  "name": "node",
+  "version": "0.0.1",
+  "author": "LIC",
+  "description": "skeleton node solution",
+  "contributors": [
+    {
+      "name": "Guy Irvine",
+      "email": "girvine@lic.co.nz"
+    } 
+  ],
+  "repository": {
+    "type": "git",
+    "url": "http://megatron:3000/node"
+  },
+  "keywords": [
+    "node"
+  ],
+  "dependencies" : {
+    "restify"   :  "1.4.x",
+    "hiredis": "",
+    "redis": "",
+      "node-static": ""
+  },
+  "engines": {
+    "node": ">=0.6"
+  }
+}
+

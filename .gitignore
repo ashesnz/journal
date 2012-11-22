@@ -1,0 +1,7 @@
+*.log
+out
+err
+*DS_Store*
+*output*
+src/bin/*
+*.xcworkspace

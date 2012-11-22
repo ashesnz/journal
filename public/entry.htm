@@ -1,0 +1,132 @@
+<div id="journal-entries">
+    <div class="rpg-submenu">
+        <nav>
+            <a href='list'>List</a>
+            <a href='new'>New</a>
+        </nav>
+    </div>
+    
+    <div class="rpg-body">
+        <div class='rpg-body-left'>
+            <h3>Tags</h3>
+            <ul data-bind="foreach: tagList">
+                <li><a data-bind="attr: { href: label }, text: label">List</a></li>
+            </ul>
+        </div>
+        
+        <div class='rpg-body-center'>
+            <div class="journal-entry journal-entry-list">
+                <div data-bind="foreach: entryList">
+                    <section class="rpg-section">
+                        <h3 data-bind="text: title">Section</h3>
+                        <div class="rpg-section-content">
+                            <span class="note journal-tags" data-bind="text: tags"></span>
+                            <div class="journal-body" data-bind="text: body"></div>
+                        </div>
+                        <nav class="journal-entry-nav">
+                            <a data-bind="attr: { href: id }">Edit this entry</a>
+                        </nav>
+                    </section>
+                    
+                </div>
+            </div>
+            
+            <div class="journal-entry journal-entry-new hide">
+                <input type="hidden" class="journal-entry-new-id"/>
+                <input type='text' class="journal-entry-new-title"/>
+                <input type='text' class="journal-entry-new-tags"/>
+                <div id="wmd-button-bar" class="wmd-panel"></div>
+                <textarea id="wmd-input" class="wmd-panel journal-entry-new-body"></textarea>
+                <br/>
+                <br/>
+                <a href="save" class="button save">Save</a>
+                <a href="cancel" class="button cancel">Cancel</a>
+                <br/>
+                <div id="wmd-preview" class="wmd-panel"></div>
+                <script type="text/javascript" src="component/wmd/js/wmd.js"></script>
+                
+            </div>
+            
+        </div>
+    </div>
+</div>
+<script>
+    ko.applyBindings( vm, $(".journal-entries")[0]);
+    
+    
+    function saveEntry() {
+        id = $( ".journal-entry-new-id" ).val();
+        if ( id == "" ) {
+            id = vm.getNewId();
+            e = vm.addEntry( id, $( ".journal-entry-new-title" ).val(), $( ".journal-entry-new-tags" ).val(), $( ".journal-entry-new-body" ).val());
+            
+            $.ajax({
+                   type: 'PUT',
+                   url: 'entry/' + id,
+                   data: { title: e.title(), tags: e.tags(), body: e.body() }
+                   });
+        } else {
+            e = vm.entrys[id]
+            
+            e.title( $( ".journal-entry-new-title" ).val() )
+            e.body( $( ".journal-entry-new-body" ).val() )
+            e.tags( $( ".journal-entry-new-tags" ).val() );
+            
+            $.post( 'entry/' + id, { title: e.title(), tags: e.tags(), body: e.body() } );
+        }
+    }
+    
+    function setEntry( id, title, tags, body ) {
+        $( ".journal-entry-new-id" ).val( id );
+        $( ".journal-entry-new-title" ).val( title );
+        $( ".journal-entry-new-tags" ).val( tags );
+        $( ".journal-entry-new-body" ).val( body );
+        
+    }
+    function clearEntry() {
+        setEntry( "", "", "" );
+    }
+    
+    
+    $( ".journal-entry-new a" ).bind( "click", function(event) {
+                                     href = this.href.slice( this.href.lastIndexOf( "/" ) + 1);
+                                     if ( href == "save" ) {
+                                     saveEntry();
+                                     }
+                                     $( ".rpg-submenu a" )[0].click();
+                                     
+                                     return false;
+                                     });
+
+    $( ".journal-entry-nav a" ).bind( "click", function(event) {
+                                     href = this.href.slice( this.href.lastIndexOf( "/" ) + 1);
+                                     
+                                     $(".journal-entry").addClass( "hide" );
+                                     
+                                     e = vm.entrys[href];
+                                     setEntry( e.id(), e.title(), e.tags(), e.body() );
+                                     $(".journal-entry-new").removeClass( "hide" );
+                                     
+                                     return false;
+                                     });
+
+    $( ".rpg-body-left a" ).bind( "click", function(event) {
+                                 href = this.href.slice( this.href.lastIndexOf( "/" ) + 1);
+                                 
+                                 return false;
+                                 });
+
+    $( ".rpg-submenu a" ).bind( "click", function(event) {
+                               clearEntry();
+                               
+                               href = this.href.slice( this.href.lastIndexOf( "/" ) + 1);
+                               
+                               $(".rpg-submenu a").removeClass( "selected" );
+                               $(this).addClass( "selected" );
+                               
+                               $(".journal-entry").addClass( "hide" );
+                               $(".journal-entry-" + href).removeClass( "hide" );
+                               
+                               return false;
+                               });
+    </script>
