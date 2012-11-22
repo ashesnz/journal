@@ -101,7 +101,7 @@ function finishDataPrep() {
 
 function startDataPrep(user) {
     mfsInit();
-    mfsFileList.push( "/entry/" + user );
+    mfsFileList.push( "entry/" + user );
     mfsGo( finishDataPrep );
 }
 
