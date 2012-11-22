@@ -12,16 +12,26 @@
             <input type='text' class="journal-entry-search"/>
             
             <h3>Tags</h3>
-            <ul data-bind="foreach: tagList">
+            <ul class="journal-entry-tags" data-bind="foreach: tagList">
                 <li><a data-bind="attr: { href: label }, text: label">List</a></li>
+            </ul>
+
+        </div>
+        <div class='rpg-body-right'>
+            <h3>Entries</h3>
+            <ul class="journal-entry-titlelist" data-bind="foreach: entryList">
+                <li><a data-bind="attr: { href: '#' + id() }, text: title">List</a></li>
             </ul>
         </div>
         
+
         <div class='rpg-body-center'>
             <div class="journal-entry journal-entry-list">
                 <div data-bind="foreach: entryList">
                     <section class="rpg-section">
-                        <h3 data-bind="text: title">Section</h3>
+                        <a data-bind="attr: { name: id }">
+                            <h3 data-bind="text: title">Section</h3>
+                        </a>
                         <div class="rpg-section-content">
                             <span class="note journal-tags" data-bind="text: tags"></span>
                             <div class="journal-body" data-bind="text: body"></div>

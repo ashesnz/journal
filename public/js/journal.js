@@ -46,7 +46,7 @@ function JournalViewModel() {
         e = new Entry( id, title, tags, body, created );
         self.entryList.unshift( e )
         self.entrys[id] = e;
-
+        
         current_tags = tags.split( "," );
         for( var i in current_tags ) {
             current_tag = current_tags[i].replace(/^\s\s*/, '').replace(/\s\s*$/, '');

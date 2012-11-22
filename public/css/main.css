@@ -15,6 +15,17 @@ font-size: 1.4em;
 border: none;
 }
 
+.rpg-body-right {
+position: absolute;
+right: 0px;
+width: 180px;
+}
+
+.rpg-body-center {
+right: 200px;
+}
+
+
 #wmd-input {
 height: 300px;
 width: 100%;
