@@ -8,6 +8,9 @@
     
     <div class="rpg-body">
         <div class='rpg-body-left'>
+            <h3>Search</h3>
+            <input type='text' class="journal-entry-search"/>
+            
             <h3>Tags</h3>
             <ul data-bind="foreach: tagList">
                 <li><a data-bind="attr: { href: label }, text: label">List</a></li>
@@ -87,7 +90,35 @@
         setEntry( "", "", "" );
     }
     
+    var searchNext=null;
+    var searching=false;
+    function search( string ) {
+        if ( searching==false ) {
+            searching=true;
+            
+            $( ".journal-entry-list .rpg-section" ).each( function(index) {
+                                                         if ( $(this).html().indexOf( string ) >= 0 ) {
+                                                         $(this).removeClass( "hide" );
+                                                         } else {
+                                                         $(this).addClass( "hide" );
+                                                         }
+                                                         })
+            
+
+            searching=false;
+            if ( searchNext != null ) {
+                var nextString = searchNext;
+                searchNext = null;
+                search( nextString );
+            }
+        } else {
+            searchNext=string;
+        }
+    }
     
+    $( ".journal-entry-search" ).bind( "input", function(event) {
+                                      search( $(this).val() );
+                                      });
     $( ".journal-entry-new a" ).bind( "click", function(event) {
                                      href = this.href.slice( this.href.lastIndexOf( "/" ) + 1);
                                      if ( href == "save" ) {
