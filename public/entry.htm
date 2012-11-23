@@ -34,7 +34,7 @@
                         </a>
                         <div class="rpg-section-content">
                             <span class="note journal-tags" data-bind="text: tags"></span>
-                            <div class="journal-body" data-bind="text: body"></div>
+                            <div class="journal-body" data-bind="html: body_fmt()"></div>
                         </div>
                         <nav class="journal-entry-nav">
                             <a data-bind="attr: { href: id }">Edit this entry</a>

@@ -23,6 +23,7 @@ function Entry( id, title, tags, body, created ) {
     self.title = ko.observable(title);
     self.tags = ko.observable(tags);
     self.body = ko.observable(body);
+    self.body_fmt = ko.computed( function() { return converter.makeHtml(self.body()); } );
     self.created = ko.observable(created);
 }
 
@@ -104,6 +105,9 @@ function startDataPrep(user) {
     mfsFileList.push( "entry/" + user );
     mfsGo( finishDataPrep );
 }
+
+var converter = new Attacklab.showdown.converter();
+//   var html = converter.makeHtml(text);
 
 var vm = new JournalViewModel();
 startDataPrep( 'PDGY' );
