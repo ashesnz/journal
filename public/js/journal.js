@@ -110,4 +110,3 @@ var converter = new Attacklab.showdown.converter();
 //   var html = converter.makeHtml(text);
 
 var vm = new JournalViewModel();
-startDataPrep( 'PDGY' );

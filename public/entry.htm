@@ -64,7 +64,6 @@
     </div>
 </div>
 <script>
-    ko.applyBindings( vm, $(".journal-entries")[0]);
     
     
     function saveEntry() {
@@ -100,8 +99,6 @@
         setEntry( "", "", "" );
     }
     
-    var searchNext=null;
-    var searching=false;
     function search( string ) {
         if ( searching==false ) {
             searching=true;
@@ -140,6 +137,11 @@
                                          });
     }
     
+    
+    $(document).ready( function() {
+                      ko.applyBindings( vm, $(".journal-entries")[0]);
+                      var searchNext=null;
+                      var searching=false;
     $( ".journal-entry-search" ).bind( "input", function(event) {
                                       search( $(this).val() );
                                       });
@@ -185,4 +187,5 @@
                                
                                return false;
                                });
+                      });
     </script>
